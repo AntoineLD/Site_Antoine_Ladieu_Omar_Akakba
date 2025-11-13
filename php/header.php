@@ -15,17 +15,35 @@ session_start();
     <header class="site-header">
         <div class="container">
             <a href="index.php" id="logo">FreshVeg 🥕</a>
-            <nav class="main-nav">
+
+
+            <nav class="main-nav" id="nav-menu">
                 <ul>
                     <li><a href="index.php">Accueil</a></li>
                     <li><a href="index.php#featured-products">Nos Produits</a></li>
                     <li><a href="contact.php">Contact</a></li>
                 </ul>
             </nav>
-            <div class="user-actions">
-                <a href="panier.php" class="nav-button">Panier 🛒</a>
-                <a href="connexion.php" class="nav-button">Connexion 👤</a>
 
+            <div class="user-actions">
+                
+                <?php
+                $total_articles = 0;
+                if (isset($_SESSION['cart'])) {
+                    foreach ($_SESSION['cart'] as $p) {
+                        $total_articles += $p['quantity'];
+                    }
+                }
+                ?>
+
+                <a href="panier.php" class="nav-button" style="position: relative;">
+                    Panier 🛒
+                    <?php if ($total_articles > 0): ?>
+                        <span class="cart-badge"><?= $total_articles ?></span>
+                    <?php endif; ?>
+                </a>
+
+                <a href="login.php" class="nav-button">Connexion 👤</a>
             </div>
         </div>
     </header>
