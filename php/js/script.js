@@ -23,3 +23,32 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    
+    // 1. SÉLECTION DU DOM
+    const searchInput = document.getElementById('search-input');
+    const productCards = document.querySelectorAll('.product-card');
+
+    if (searchInput) {
+        // 2. ÉCOUTE DE L'ÉVÉNEMENT (à chaque lettre tapée)
+        searchInput.addEventListener('keyup', function(event) {
+            
+            // On récupère le texte tapé en minuscule
+            const searchValue = event.target.value.toLowerCase();
+
+            // 3. MANIPULATION DU DOM (Boucle sur chaque carte)
+            productCards.forEach(function(card) {
+                // On récupère le titre du produit (h4)
+                const title = card.querySelector('h4').textContent.toLowerCase();
+
+                // Si le titre contient la recherche, on affiche, sinon on cache
+                if (title.includes(searchValue)) {
+                    card.style.display = 'flex'; // On laisse visible
+                } else {
+                    card.style.display = 'none'; // On cache
+                }
+            });
+        });
+    }
+});
