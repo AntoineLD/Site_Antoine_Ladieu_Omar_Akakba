@@ -15,6 +15,7 @@ session_start();
     <header class="site-header">
         <div class="container">
             <a href="index.php" id="logo">FreshVeg 🥕</a>
+            
 
 
             <nav class="main-nav" id="nav-menu">
@@ -46,4 +47,5 @@ session_start();
                 <a href="login.php" class="nav-button">Connexion 👤</a>
             </div>
         </div>
+        <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
     </header>

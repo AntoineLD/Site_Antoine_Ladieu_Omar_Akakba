@@ -1,12 +1,14 @@
 <?php include 'header.php'; ?>
 
 <main>
-    <section id="hero">
+ <section id="hero">
         <div class="container">
-            <h2>Le meilleur du marché, directement dans votre cuisine.</h2>
-            <p>Des légumes de saison, cueillis avec soin par nos producteurs locaux.</p>
-            <a href="#featured-products" class="cta-button">Découvrir notre sélection</a>
-        </div>
+            <div class="hero-glass-card">
+                <h2>Le meilleur du marché, directement dans votre cuisine.</h2>
+                <p>Des légumes de saison, cueillis avec soin par nos producteurs locaux.</p>
+                <a href="#featured-products" class="cta-button">Découvrir notre sélection</a>
+            </div>
+            </div>
     </section>
 
     <section id="featured-products">
@@ -22,7 +24,7 @@
                 <article class="product-card" id="prod-tomate01">
                     <img src="assets/img/tomates.png" alt="Tomates Bio">
                     <div class="card-content">
-                        <h4>Tomates Cœur de Bœuf Bio</h4>
+                        <h4>Tomates Bio</h4>
                         <p class="product-price">4.50€ / kg</p>
                         <form action="ajout_panier.php" method="post" class="ajax-form">
                             <input type="hidden" name="product_id" value="tomate01">
@@ -148,7 +150,7 @@
                 <article class="product-card" id="prod-patate01">
                     <img src="assets/img/agata.jpg" alt="Pommes de terre">
                     <div class="card-content">
-                        <h4>Pommes de Terre Agata Bio</h4>
+                        <h4>Pommes de Terre Bio</h4>
                         <p class="product-price">1.90€ / kg</p>
                         <form action="ajout_panier.php" method="post" class="ajax-form">
                             <input type="hidden" name="product_id" value="patate01">
@@ -211,7 +213,7 @@
                 <article class="product-card" id="prod-radis01">
                     <img src="assets/img/radis_roses.jpg" alt="Radis Roses">
                     <div class="card-content">
-                        <h4>Botte de Radis Roses Bio</h4>
+                        <h4>Botte de Radis Bio</h4>
                         <p class="product-price">1.50€ / botte</p>
                         <form action="ajout_panier.php" method="post" class="ajax-form">
                             <input type="hidden" name="product_id" value="radis01">
