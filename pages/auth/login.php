@@ -1,7 +1,7 @@
-<?php include 'header.php'; ?>
+<?php include '../../utils/header.php'; ?>
 
 <?php
-require_once 'db.php';
+require_once '../../utils/db.php';
 
 $errors = [];
 
@@ -10,8 +10,8 @@ if (isset($_GET['registered'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Email invalide.';
     if ($password === '') $errors[] = 'Mot de passe requis.';
@@ -30,7 +30,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 'email' => $user['email']
             ];
 
-            // Si une tentative d'ajout était en attente, l'appliquer alors on redirige vers le panier
+            // Si une tentative d'ajout était en attente, l'appliquer avant de rediriger vers le panier
             if (isset($_SESSION['pending_add'])) {
                 $pending = $_SESSION['pending_add'];
                 if (!isset($_SESSION['cart'])) $_SESSION['cart'] = [];
@@ -41,23 +41,23 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                     $_SESSION['cart'][$pid]['quantity'] += $qty;
                 } else {
                     $_SESSION['cart'][$pid] = [
-                        'name' => $pending['product_name'] ?? '',
-                        'price' => $pending['product_price'] ?? 0,
-                        'image' => $pending['product_image'] ?? '',
+                        'name' => isset($pending['product_name']) ? $pending['product_name'] : '',
+                        'price' => isset($pending['product_price']) ? $pending['product_price'] : 0,
+                        'image' => isset($pending['product_image']) ? $pending['product_image'] : '',
                         'quantity' => $qty
                     ];
                 }
                 unset($_SESSION['pending_add']);
-                header('Location: panier.php');
+                header('Location: index.php');
                 exit();
             }
 
             // Redirection normale
-            $next = $_GET['next'] ?? null;
+            $next = isset($_GET['next']) ? $_GET['next'] : null;
             if ($next) {
                 header('Location: ' . $next);
             } else {
-                header('Location: index.php');
+                header('Location: ../../index.php');
             }
             exit();
         } else {
@@ -84,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" style="max-width:480px;margin:0 auto;">
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                <input type="email" id="email" name="email" required value="<?= htmlspecialchars(isset($_POST['email']) ? $_POST['email'] : '') ?>">
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
@@ -98,4 +98,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include '../../utils/footer.php'; ?>

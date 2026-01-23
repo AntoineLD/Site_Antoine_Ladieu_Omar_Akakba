@@ -1,5 +1,5 @@
 <?php
-require_once __DIR__ . '/config/parameters.php';
+require_once __DIR__ . '/../config/parameters.php';
 
 // Cette version tente automatiquement les ports MySQL courants (MAMP: 8889 / système: 3306)
 
@@ -14,7 +14,6 @@ function getPDO()
         $portsToTry[] = (int)$envPort;
     }
     
-    $portsToTry[] = 8889;
     $portsToTry[] = 3306;
 
     $lastException = null;
@@ -48,3 +47,4 @@ function getPDO()
 }
 
 ?>
+

@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include '../../utils/header.php'; ?>
 
 <?php
 if (!isset($_SESSION['user'])) {
@@ -21,4 +21,4 @@ $user = $_SESSION['user'];
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include '../../utils/footer.php'; ?>

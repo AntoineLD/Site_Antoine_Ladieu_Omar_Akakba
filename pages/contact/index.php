@@ -1,4 +1,4 @@
-<?php include 'header.php'; ?>
+<?php include '../../utils/header.php'; ?>
 
 <main>
     <div class="container">
@@ -6,7 +6,7 @@
 
         <p style="text-align: center; margin-bottom: 2rem;">Une question, une suggestion ou un problème ? Remplissez le formulaire ci-dessous.</p>
 
-        <form action="traitement_contact.php" method="post" class="contact-form">
+        <form action="process.php" method="post" class="contact-form">
             
             <div class="form-group">
                 <label for="name">Votre Nom et Prénom :</label>
@@ -29,4 +29,4 @@
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include '../../utils/footer.php'; ?>

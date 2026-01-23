@@ -1,14 +1,14 @@
-<?php include 'header.php'; ?>
+<?php include '../../utils/header.php'; ?>
 
 <?php
-require_once 'db.php';
+require_once '../../utils/db.php';
 
 $errors = [];
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $name = trim($_POST['name'] ?? '');
-    $email = trim($_POST['email'] ?? '');
-    $password = $_POST['password'] ?? '';
+    $name = trim(isset($_POST['name']) ? $_POST['name'] : '');
+    $email = trim(isset($_POST['email']) ? $_POST['email'] : '');
+    $password = isset($_POST['password']) ? $_POST['password'] : '';
 
     if ($name === '') $errors[] = 'Le nom est requis.';
     if (!filter_var($email, FILTER_VALIDATE_EMAIL)) $errors[] = 'Email invalide.';
@@ -50,11 +50,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         <form method="post" style="max-width:480px;margin:0 auto;">
             <div class="form-group">
                 <label for="name">Nom complet</label>
-                <input type="text" id="name" name="name" required value="<?= htmlspecialchars($_POST['name'] ?? '') ?>">
+                <input type="text" id="name" name="name" required value="<?= htmlspecialchars(isset($_POST['name']) ? $_POST['name'] : '') ?>">
             </div>
             <div class="form-group">
                 <label for="email">Email</label>
-                <input type="email" id="email" name="email" required value="<?= htmlspecialchars($_POST['email'] ?? '') ?>">
+                <input type="email" id="email" name="email" required value="<?= htmlspecialchars(isset($_POST['email']) ? $_POST['email'] : '') ?>">
             </div>
             <div class="form-group">
                 <label for="password">Mot de passe</label>
@@ -66,4 +66,4 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </div>
 </main>
 
-<?php include 'footer.php'; ?>
+<?php include '../../utils/footer.php'; ?>

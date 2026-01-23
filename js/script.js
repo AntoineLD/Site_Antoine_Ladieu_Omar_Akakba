@@ -3,6 +3,28 @@ document.addEventListener('DOMContentLoaded', function() {
     console.log("Script JS chargé ✅");
 
     // ============================================================
+    // MENU HAMBURGER (Mobile Responsive)
+    // ============================================================
+    const menuToggle = document.getElementById('menu-toggle');
+    const navMenu = document.getElementById('nav-menu');
+
+    if (menuToggle && navMenu) {
+        menuToggle.addEventListener('click', function() {
+            navMenu.classList.toggle('active');
+            menuToggle.classList.toggle('active');
+        });
+
+        // Fermer le menu quand on clique sur un lien
+        const navLinks = navMenu.querySelectorAll('a');
+        navLinks.forEach(link => {
+            link.addEventListener('click', function() {
+                navMenu.classList.remove('active');
+                menuToggle.classList.remove('active');
+            });
+        });
+    }
+
+    // ============================================================
     //  BARRE DE RECHERCHE (Filtrage dynamique)
     // ============================================================
     const searchInput = document.getElementById('search-input');
@@ -67,13 +89,17 @@ document.addEventListener('DOMContentLoaded', function() {
             const qtyAdded = parseInt(formData.get('quantity'));
             const btn = form.querySelector('.add-to-cart-button');
             const originalText = btn.textContent;
+            const actionUrl = form.getAttribute('action');
+
+            console.log('Form submitted, action URL:', actionUrl);
 
             // ça envoie les données en AJAX pour le serv
-            fetch('ajout_panier.php', {
+            fetch(actionUrl, {
                 method: 'POST',
                 body: formData
             })
             .then(() => {
+                console.log('Produit ajouté au panier');
                 //connfirmation avec le bouton vert pour un visuel
                 btn.textContent = "Ajouté ! ✅";
                 btn.style.backgroundColor = "#2E7D32"; 
@@ -84,17 +110,22 @@ document.addEventListener('DOMContentLoaded', function() {
                 }, 2000);
 
                 // Changement du nombre dans le badge du panier
-                const cartLink = document.querySelector('a[href="panier.php"]');
-                let badge = cartLink.querySelector('.cart-badge');
+                const cartLink = document.querySelector('a[href*="cart"]');
+                console.log('Cart link found:', cartLink);
+                if (cartLink) {
+                    let badge = cartLink.querySelector('.cart-badge');
+                    console.log('Badge found:', badge);
 
-                if (badge) {
-                    let currentVal = parseInt(badge.textContent);
-                    badge.textContent = currentVal + qtyAdded;
-                } else {
-                    badge = document.createElement('span');
-                    badge.classList.add('cart-badge');
-                    badge.textContent = qtyAdded;
-                    cartLink.appendChild(badge);
+                    if (badge) {
+                        let currentVal = parseInt(badge.textContent);
+                        badge.textContent = currentVal + qtyAdded;
+                    } else {
+                        badge = document.createElement('span');
+                        badge.classList.add('cart-badge');
+                        badge.textContent = qtyAdded;
+                        cartLink.appendChild(badge);
+                        console.log('Badge created');
+                    }
                 }
 
                 //Pour remettre la quantité à 1 apres le clique 

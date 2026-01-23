@@ -1,5 +1,8 @@
 <?php
-date_default_timezone_set('Europe/Paris'); 
+date_default_timezone_set('Europe/Paris');
+// Déterminer le chemin racine basé sur le fichier qui inclut ce footer
+$basePath = dirname($_SERVER['SCRIPT_FILENAME']);
+$basePath = strpos($basePath, 'pages') !== false || strpos($basePath, 'api') !== false ? '../../' : '';
 ?>
 
 <footer class="site-footer">
@@ -10,7 +13,7 @@ date_default_timezone_set('Europe/Paris');
             <ul>
                 <li><a href="#">Mentions Légales</a></li>
                 <li><a href="#">Conditions Générales de Vente</a></li>
-                <li><a href="contact.php">Contactez-nous</a></li>
+                <li><a href="<?= $basePath ?>pages/contact/index.php">Contactez-nous</a></li>
             </ul>
         </div>
 
@@ -27,7 +30,7 @@ date_default_timezone_set('Europe/Paris');
     </div>
 </footer>
 
-<script src="js/script.js"></script>
+<script src="<?= $basePath ?>js/script.js"></script>
 
 </body>
 </html>

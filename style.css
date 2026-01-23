@@ -60,26 +60,58 @@ main {
     text-decoration: none;
 }
 
-.main-nav { display: none; }
-.main-nav ul { list-style: none; display: flex; gap: 1.5rem; }
-.main-nav a { text-decoration: none; color: var(--dark-text); font-weight: 500; }
-.user-actions { display: flex; align-items: center; gap: 0.5rem; }
+/* ======================================== */
+/* HARMONISATION DES BOUTONS DE NAVIGATION  */
+/* ======================================== */
 
-a.nav-button {
+/* ======================================== */
+/* HARMONISATION RESPONSIVE DES BOUTONS     */
+/* ======================================== */
+
+.main-nav a, 
+.nav-button {
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    color: var(--text-main);
+    
+    /* Font-size : entre 0.8rem et 0.95rem selon la largeur */
+    font-size: clamp(0.8rem, 0.9vw + 0.5rem, 0.95rem);
+    font-weight: 600;
+    
+    /* Padding fluide : réduit l'espacement interne sur petit écran */
+    padding: 6px clamp(10px, 1.2vw, 18px); 
+    
     border: 1px solid var(--border-color);
-    border-radius: 20px;
-    color: var(--dark-text);
-    font-size: 0.9rem;
-    transition: all 0.2s ease-in-out;
-}
-a.nav-button:hover {
-    background-color: var(--primary-color);
-    color: #FFFFFF;
-    border-color: var(--primary-color);
+    border-radius: 50px;
+    
+    display: inline-block;
+    transition: all 0.3s ease;
+    background-color: transparent;
+    cursor: pointer;
+
+    /* REGLAGES FIXES */
+    white-space: nowrap; /* Empêche le texte de revenir à la ligne dans le bouton */
+    flex-shrink: 1;      /* Permet au bouton de réduire si nécessaire */
 }
 
+/* Hover identique */
+.main-nav a:hover, 
+.nav-button:hover {
+    background-color: var(--primary-color);
+    color: white;
+    border-color: var(--primary-color);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 10px rgba(46, 125, 50, 0.2);
+}
+
+/* Espacement fluide entre les boutons */
+.main-nav ul {
+    list-style: none;
+    display: flex;
+    /* Gap : entre 8px et 15px selon la largeur */
+    gap: clamp(8px, 1vw, 15px); 
+    align-items: center;
+    flex-wrap: nowrap; /* Empêche les boutons de passer les uns sous les autres */
+}
 
 /* . SECTION "HÉROS" (BANNIÈRE)            */
 
@@ -480,4 +512,67 @@ a.nav-button:hover {
 .qty-input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+/* ============================================
+   RESPONSIVE MOBILE - NAVBAR
+   ============================================ */
+@media (max-width: 768px) {
+    .site-header .container {
+        gap: 0.5rem;
+        align-items: center;
+    }
+
+    #logo {
+        font-size: clamp(1rem, 5vw, 1.2rem);
+        flex-shrink: 0;
+    }
+
+    .main-nav {
+        display: flex;
+        flex: 1;
+    }
+
+    .main-nav ul {
+        gap: 0.3rem;
+        flex-wrap: nowrap;
+    }
+
+    .main-nav a {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        padding: 6px clamp(8px, 1.5vw, 12px);
+        white-space: nowrap;
+    }
+
+    .user-actions {
+        gap: 0.3rem;
+        flex-wrap: nowrap;
+        display: flex;
+        align-items: center;
+        flex: 1;
+        justify-content: flex-end;
+    }
+
+    .user-actions a {
+        font-size: clamp(0.7rem, 2vw, 0.85rem);
+        padding: 6px clamp(8px, 1.5vw, 12px);
+        white-space: nowrap;
+    }
+
+    .cart-badge {
+        font-size: 0.7rem;
+    }
+}
+
+@media (max-width: 480px) {
+    #logo {
+        font-size: 0.9rem;
+    }
+
+    .main-nav a,
+    .user-actions a {
+        font-size: clamp(0.65rem, 1.5vw, 0.75rem);
+        padding: 5px clamp(6px, 1vw, 8px);
+        white-space: nowrap;
+    }
 }
